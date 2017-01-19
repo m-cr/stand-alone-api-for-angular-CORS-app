@@ -40,7 +40,11 @@ const authenticated = (req, res, next) => {
 	}
 }
 
-app.use('/api', authenticated, require('./api'));
+app.use('/api', require('./api'));
+
+app.get('/', (req, res, next) => {
+	res.send("API calls located at /api/ ...");
+});
 
 //error handling endware
 app.use( (err, req, res, next) => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "DATABASE_URL=postgres://localhost/siriusiqmobile NODE_ENV=development PORT=3000 nodemon server.js"
+    "start:dev": "DATABASE_URL=postgres://localhost/siriusiqmobile NODE_ENV=development PORT=3005 nodemon server.js"
   },
   "author": "Michael Crowley",
   "license": "ISC",
