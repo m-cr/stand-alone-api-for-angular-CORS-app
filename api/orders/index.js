@@ -45,28 +45,31 @@ router.delete('/:id', (req, res, next) => {
 		id: req.params.id
 	}})
 	.then( () => {
-		console.log('deleted order with ID ' + req.params.id);
-		res.sendStatus(200);
+		res.sendStatus(204);
 	})
 	.catch(next);
 });
 
 router.put('/:id', (req, res, next) => {
-	let order;
-
 	Order.update({
 		status: req.body.status
 	}, {
 		where: {
 			id: req.params.id
-		},
-		returning: true
+		}
 	})
-	.then( (result) => {
-		order = result[1][0].get();
-		res.send(order);
+	.then( () => {
+		res.sendStatus(204);
 	})
 	.catch(next);
 });
+
+// where: {
+// 			id: req.params.id
+// 		},
+// 		returning: true
+// 	})
+// 	.then( (result) => {
+// 		order = result[1][0].get();
 
 

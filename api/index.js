@@ -1,13 +1,12 @@
 'use strict';
 
-var router = require('express').Router();
+const router = require('express').Router();
 
-router.use('/products' , require('./products'));
-router.use('/orders' , require('./orders'));
-router.use('/reviews' , require('./reviews'));
-router.use('/lineitems' , require('./lineitems'));
-
-//maybe not needed
-// router.use('/categories' , require('./categories'));
+router.use('/lineitems', require('./lineitems'));
+router.use('/orders', require('./orders'));
+router.use('/products', require('./products'));
+router.use('/reviews', require('./reviews'));
+router.use('/users', require('./users'));
+router.use('/authenticate', require('./authenticate'));
 
 module.exports = router;

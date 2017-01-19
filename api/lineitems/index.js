@@ -18,51 +18,42 @@ router.get('/', (req, res, next) => {
 	.catch(next);
 });
 
-router.post('/', function(req, res, next){
+router.post('/', (req, res, next) => {
 	LineItem.create({
 		price: req.body.price,
-		quantity: req.body.quantity
+		quantity: req.body.quantity,
+		orderId: req.body.orderId,
+		productId: req.body.productId
 	})
 	.then( (lineitem) => {
-		lineitem.setOrder(req.body.orderId);
-		return lineitem;
-	})
-	.then(function(lineitem){
-		lineitem.setProduct(req.body.productId);
-		return lineitem;
-	})
-	.then(function(lineitem){
 		res.send(lineitem);
 	})
 	.catch(next);
 });
 
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', (req, res, next) => {
 	LineItem.destroy({
 		where: {
 			id: req.params.id
 		}
 	})
 	.then( () => {
-		console.log('deleted line item' + req.params.id);
-		res.sendStatus(200);
+		res.sendStatus(204);
 	})
 	.catch(next);
 });
 
 //if the lineup post has the same product, it updates the lineitem
 
-router.put('/:id', function(req, res, next){
+router.put('/:id', (req, res, next) => {
 	LineItem.update({
 		quantity: req.body.quantity,
 		price: req.body.price
 	}, {
 		where: {id: req.params.id}
 	})
-	.then( (result) => {
-		console.log(result);
-		console.log('lineitem ' + req.params.id + ' updated');
-		res.sendStatus(201);
+	.then( () => {
+		res.sendStatus(204);
 	})
 	.catch(next);
 });

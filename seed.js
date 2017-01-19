@@ -16,6 +16,12 @@ const seed = () => {
 		isAdmin: true
 	});
 
+	const seedOtherUser = User.create({
+		email: 'demo2@demo.com',
+		password: 'demo2',
+		isAdmin:true
+	})
+
 	const seedProduct = Product.create({
 		title: 'Product1',
 		description: 'Product Description',
@@ -37,8 +43,8 @@ const seed = () => {
 		price: 99.99
 	});
 
-	return Promise.all([seedUser, seedProduct, seedOrder, seedLineItem, seedReview])
-		.spread( (user, product, order, lineItem, review) => {
+	return Promise.all([seedUser, seedOtherUser, seedProduct, seedOrder, seedLineItem, seedReview])
+		.spread( (user, otherUser, product, order, lineItem, review) => {
 			return Promise.all([
 				user.setOrders(order),
 				lineItem.setProduct(product),
@@ -46,7 +52,6 @@ const seed = () => {
 				review.setUser(user),
 				review.setProduct(product)
 			]);
-
 		});
 }
 
