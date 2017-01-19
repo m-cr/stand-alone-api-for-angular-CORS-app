@@ -3,6 +3,8 @@ const config = require('./config.js');
 const app = require('express')();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 module.exports = app;
 
@@ -15,8 +17,30 @@ if(process.env.NODE_ENV === 'development'){
 
 app.use(bodyParser.json());	
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use('/api', require('./api'));
+const authenticated = (req, res, next) => {
+	
+	let token = req.body.token || req.query.token || req.headers['x-access-token'];
+	
+	if (token) {
+		jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+			if (err) {
+				return res.send('Failed to authenticate token.');    
+			} else {
+				req.decoded = decoded;    
+				next();
+			}
+		});
+	} else {
+		return res.status(403).send({ 
+			success: false, 
+			message: 'No token provided.' 
+		});
+	}
+}
+
+app.use('/api', authenticated, require('./api'));
 
 //error handling endware
 app.use( (err, req, res, next) => {
