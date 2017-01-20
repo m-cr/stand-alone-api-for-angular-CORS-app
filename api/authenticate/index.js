@@ -6,6 +6,8 @@ const User = require('../../db').models.User;
 module.exports = router;
 
 router.post('/', (req, res, next) => {
+	// console.log(req.body);
+	// console.log(req.headers.authorization);
 	User.findOne({
 		where: {email: req.body.email}
 	})

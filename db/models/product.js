@@ -13,5 +13,6 @@ module.exports = db.define('product', {
 	categories: {
 		type: db.Sequelize.ARRAY(db.Sequelize.STRING),
 		allowNull: false
-	}
+	},
+	brand: db.Sequelize.STRING
 });

@@ -1,14 +1,25 @@
 'use strict';
 
 const router = require('express').Router();
+const jwt = require('jsonwebtoken');
+const app = require('../server.js');
 
 const authenticated = (req, res, next) => {
 	
-	let token = req.body.token || req.query.token || req.headers['x-access-token'];
-	
+	let token;
+
+	console.log(req.headers.authorization);
+
+	if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+		token = req.headers.authorization.split(' ')[1];
+	}
+
+	console.log('token: ' + token);
+
 	if (token) {
-		jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+		jwt.verify(token, app.get('serverSecret'), function(err, decoded) {      
 			if (err) {
+				console.error(err);
 				return res.send('Failed to authenticate token.');    
 			} else {
 				req.decoded = decoded;    
