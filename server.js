@@ -1,16 +1,16 @@
 'use strict';
 const app = require('express')();
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
 module.exports = app;
 
-app.set('serverSecret', process.env.SERVER_SECRET);
-
-if(process.env.NODE_ENV === 'development'){
-	app.use(morgan('dev'));
+if ( process.env.NODE_ENV === 'development'){
+	app.set('serverSecret', require('./config.js').serverSecret)
+	app.use(require('morgan')('dev'));
+} else {
+	app.set('serverSecret', process.env.SERVER_SECRET);
 }
 
 app.use(bodyParser.json());	
