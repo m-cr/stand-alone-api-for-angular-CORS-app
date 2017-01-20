@@ -1,5 +1,4 @@
 'use strict';
-const config = require('./config.js');
 const app = require('express')();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -8,9 +7,8 @@ const cors = require('cors');
 
 module.exports = app;
 
-app.set('serverSecret', config.serverSecret);
+app.set('serverSecret', process.env.SERVER_SECRET);
 
-//logging
 if(process.env.NODE_ENV === 'development'){
 	app.use(morgan('dev'));
 }
@@ -20,14 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const authenticated = (req, res, next) => {
-	
 	let token = req.body.token || req.query.token || req.headers['x-access-token'];
-	
 	if (token) {
 		jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
-			if (err) {
-				return res.send('Failed to authenticate token.');    
-			} else {
+			if (err) return res.send('Failed to authenticate token.');    
+			else {
 				req.decoded = decoded;    
 				next();
 			}
