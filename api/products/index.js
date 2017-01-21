@@ -5,17 +5,24 @@ const models = require('../../db').models;
 const Product = models.Product;
 const Review = models.Review;
 const User = models.User;
+const Category = models.Category;
 
 module.exports = router;
 
 router.get('/', (req, res, next) => {
 	Product.findAll({
-		include: [{
-			model: Review,
-			include: [User]
-		}]
+		include: [
+			Category, 
+			{
+				model: Review,
+				include: [{
+					model: User,
+					attributes: ['id', 'email']
+				}]
+			}
+		]
 	})
-	.then( (products) => {
+	.then( products => {
 		res.send(products);
 	})
 	.catch(next);
@@ -24,27 +31,34 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
 	Product.findOne({
 		where: {id: req.params.id},
-		include: [{
-			model: Review,
-			include: [User]
-		}]
+		include: [
+			Category, 
+			{
+				model: Review,
+				include: [{
+					model: User,
+					attributes: ['id', 'email']
+				}]
+			}
+		]
 	})
-	.then( (product) => {
+	.then( product => {
 		res.send(product);
 	})
 	.catch(next);
 });
 
 router.post('/', (req, res, next) => {
+	console.log(req.body.categories);
 	Product.create({
 		title: req.body.title,
 		description: req.body.description,
 		price: req.body.price,
 		inventory_qty: req.body.inventory_qty,
 		photos: req.body.photos,
-		categories: req.body.categories
+		brand: req.body.brand
 	})
-	.then( (product) => {
+	.then( product => {
 		res.status(201).send(product);
 	})
 	.catch(next);
@@ -69,7 +83,7 @@ router.put('/:id', (req, res, next) => {
 		price: req.body.price,
 		inventory_qty: req.body.inventory_qty,
 		photos: req.body.photos,
-		categories: req.body.categories
+		brand: req.body.brand
 	}, {
 		where: {
 			id: req.params.id

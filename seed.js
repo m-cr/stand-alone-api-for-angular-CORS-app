@@ -6,6 +6,7 @@ const Product = models.Product;
 const Order = models.Order;
 const Review = models.Review;
 const LineItem = models.LineItem;
+const Category = models.Category;
 const Promise = require('sequelize').Promise;
 
 const seed = () => {
@@ -16,13 +17,16 @@ const seed = () => {
 		isAdmin: true
 	});
 
+	const category1 = Category.create({name: 'Category1'});
+	const category2 = Category.create({name: 'Category2'});
+	const category3 = Category.create({name: 'Category3'});
+
 	const product1 = Product.create({
 		title: 'Product1',
 		description: 'Product1 Description',
 		price: 1.00,
 		inventory_qty: 10,
 		photos: 'http://www.fillmurray.com/200/300',
-		categories: ['Category1', 'Category2'],
 		brand: 'Brand1'
 	});
 
@@ -32,7 +36,6 @@ const seed = () => {
 		price: 2.00,
 		inventory_qty: 10,
 		photos: 'http://www.fillmurray.com/200/300',
-		categories: ['Category2', 'Category3'],
 		brand: 'Brand2'
 	})
 
@@ -42,7 +45,6 @@ const seed = () => {
 		price: 3.00,
 		inventory_qty: 10,
 		photos: 'http://www.fillmurray.com/200/300',
-		categories: ['Category3', 'Category4'],
 		brand: 'Brand3'
 	});
 
@@ -89,8 +91,8 @@ const seed = () => {
 		price: 3.00
 	});
 
-	return Promise.all([user1, product1, product2, product3, order1, order2, order3, review1, review2, review3, review4, review5, review6, lineItem1, lineItem2, lineItem3])
-		.spread( (user, product1, product2, product3, order1, order2, order3, review1, review2, review3, review4, review5, review6, lineItem1, lineItem2, lineItem3) => {
+	return Promise.all([user1, category1, category2, category3, product1, product2, product3, order1, order2, order3, review1, review2, review3, review4, review5, review6, lineItem1, lineItem2, lineItem3])
+		.spread( (user, category1, category2, category3, product1, product2, product3, order1, order2, order3, review1, review2, review3, review4, review5, review6, lineItem1, lineItem2, lineItem3) => {
 			return Promise.all([
 				user.setOrders(order1),
 				user.setOrders(order2),
@@ -112,7 +114,12 @@ const seed = () => {
 				review5.setUser(user),
 				review5.setProduct(product2),
 				review6.setUser(user),
-				review6.setProduct(product3)
+				review6.setProduct(product3),
+				category1.addProduct(product1),
+				category1.addProduct(product2),
+				category1.addProduct(product3),
+				category2.addProduct(product2),
+				category3.addProduct(product3)
 			]);
 		});
 }

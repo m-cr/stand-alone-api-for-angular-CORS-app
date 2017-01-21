@@ -1,16 +1,25 @@
+'use strict';
 const router = require('express').Router();
 const LineItem = require('../../db').models.LineItem;
 const Product = require('../../db').models.Product;
+const Order = require('../../db').models.Order;
 
 module.exports = router;
 
 router.get('/', (req, res, next) => {
+	LineItem.findAll({
+		include: [Product, Order]
+	})
+	.then( (lineItems) => {
+		res.send(lineItems);
+	})
+	.catch(next);
+});
+
+router.get('/:id', (req, res, next) => {
 	LineItem.findOne({
-		where: {
-			orderId: req.params.id
-			// id: req.params.itemId
-		},
-		include: [Product]
+		where: {id: req.params.id},
+		include: [Product, Order]
 	})
 	.then( (lineItems) => {
 		res.send(lineItems);
@@ -43,7 +52,6 @@ router.delete('/:id', (req, res, next) => {
 	.catch(next);
 });
 
-//if the lineup post has the same product, it updates the lineitem
 
 router.put('/:id', (req, res, next) => {
 	LineItem.update({

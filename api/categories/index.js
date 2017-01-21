@@ -1,41 +1,40 @@
 'use strict';
 
 const router = require('express').Router();
-const Review = require('../../db').models.Review;
-
+const Category = require('../../db').models.Category;
+const Product = require('../../db').models.Product;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-	Review.findAll()
-	.then( reviews => {
-		res.send(reviews);
+	Category.findAll({
+		include: [Product]
+	})
+	.then( categories => {
+		res.send(categories);
 	})
 	.catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
-	Review.findById(req.params.id)
-	.then( review => {
-		res.send(review);
+	Category.findById(req.params.id)
+	.then( category => {
+		res.send(category);
 	})
 	.catch(next);
 });
 
 router.post('/', (req, res, next) => {
-	Review.create({
-		content: req.body.content,
-		rate: req.body.rate,
-		productId: req.body.productId,
-		userId: req.body.userId
+	Category.create({
+		name: req.body.name
 	})
-	.then( review => {
-		res.status(201).send(review);
+	.then( category => {
+		res.status(201).send(category);
 	})
 	.catch(next);
 });
 
 router.delete('/:id', (req, res, next) => {
-	Review.destroy({
+	Category.destroy({
 		where: {id: req.params.id}
 	})
 	.then( () => {
@@ -45,9 +44,8 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-	Review.update({
-		content: req.body.content,
-		rate: req.body.rate,
+	Category.update({
+		name: req.body.name
 	}, { 
 		where: { 
 			id: req.params.id 
