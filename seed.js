@@ -26,7 +26,7 @@ const seed = () => {
 		description: 'Product1 Description',
 		price: 1.00,
 		inventory_qty: 10,
-		photos: 'http://www.fillmurray.com/200/300',
+		photos: 'http://sekapporchard.com/wp-content/uploads/2013/09/Broccoli.jpg',
 		brand: 'Brand1'
 	});
 
@@ -35,7 +35,7 @@ const seed = () => {
 		description: 'Product2 Description',
 		price: 2.00,
 		inventory_qty: 10,
-		photos: 'http://www.fillmurray.com/200/300',
+		photos: 'http://howng.com/wp-content/uploads/2015/10/CARROTS.jpg',
 		brand: 'Brand2'
 	})
 
@@ -44,7 +44,7 @@ const seed = () => {
 		description: 'Product3 Description',
 		price: 3.00,
 		inventory_qty: 10,
-		photos: 'http://www.fillmurray.com/200/300',
+		photos: 'http://www.petpoisonhelpline.com/wp-content/uploads/2011/10/Onion.jpg',
 		brand: 'Brand3'
 	});
 
