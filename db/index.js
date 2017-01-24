@@ -10,16 +10,16 @@ const Category = require('./models/category.js');
 const CategoryProduct = require('./models/categoryproduct.js')
 
 module.exports = {
-	db,
-	models: {
-		User,
-		Order,
-		Product,
-		LineItem,
-		Review,
-		Category,
-		CategoryProduct
-	}
+  db,
+  models: {
+    User,
+    Order,
+    Product,
+    LineItem,
+    Review,
+    Category,
+    CategoryProduct
+  }
 };
 
 Review.belongsTo(Product);

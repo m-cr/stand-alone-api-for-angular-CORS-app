@@ -2,5 +2,4 @@
 
 const db = require('../_db');
 
-module.exports = db.define('category_product', {
-});
+module.exports = db.define('category_product', {});

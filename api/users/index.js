@@ -8,25 +8,25 @@ const Order = models.Order;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-	User.findAll()
-	.then( users => {
-		res.send(users.map((user)=> user.sanitize()));
-	})
-	.catch(next);
+  User.findAll()
+  .then( users => {
+    res.send(users.map((user)=> user.sanitize()));
+  })
+  .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
-	User.findById(req.params.id)
-	.then( user => {
-		res.send(user.sanitize());
-	})
-	.catch(next);
+  User.findById(req.params.id)
+  .then( user => {
+    res.send(user.sanitize());
+  })
+  .catch(next);
 });
 
 router.get('/:id/cart', (req, res, next) => {
-	Order.getCartForUser(req.params.id)
-	.then( cart => {
-		res.send(cart);
-	})
-	.catch(next);
+  Order.getCartForUser(req.params.id)
+  .then( cart => {
+    res.send(cart);
+  })
+  .catch(next);
 });
