@@ -23,7 +23,7 @@ const seed = () => {
 
   const product1 = Product.create({
     title: 'Soda Pop',
-    description: 'Fizzy Drink',
+    description: 'A fizzy, sugary drink.',
     price: 2.00,
     inventory_qty: 10,
     photos: 'http://www.webweaver.nu/clipart/img/misc/food/drinks/soda-pop.jpg',
@@ -32,7 +32,7 @@ const seed = () => {
 
   const product2 = Product.create({
     title: 'Ketchup',
-    description: 'Tomato Condiment',
+    description: 'Tomato-based condiment, often seen on hot dogs and hamburgers.',
     price: .25,
     inventory_qty: 100,
     photos: 'https://img.clipartfest.com/4ce3c7ecfb3b6692ab4d6a56821be424_ketchup-on-pinterest-heinz-ketchup-clipart_1500-1500.jpeg',
@@ -41,7 +41,7 @@ const seed = () => {
 
   const product3 = Product.create({
     title: 'Steak',
-    description: 'Choice Cut.',
+    description: 'Beef, cooked with care.',
     price: 25.00,
     inventory_qty: 10,
     photos: 'http://cdn-image.foodandwine.com/sites/default/files/styles/550x550/public/hd-201204-ss-steak-cities-las-vegas-charlie-palmer-steak.jpg?itok=uV9BL1zK',
@@ -53,28 +53,28 @@ const seed = () => {
   const order3 = Order.create({ status: 'pending' });	
 
   const review1 = Review.create({
-    content: 'Review1 Content',
+    content: 'No idea what they were thinking with this one!',
     rate: ['*']
   });
   const review2 = Review.create({
-    content: 'Review2 Content',
+    content: 'Not great :(',
     rate: ['*','*']
   });
   const review3 = Review.create({
-    content: 'Review3 Content',
+    content: 'Decent.',
     rate: ['*','*','*']
   });
 
   const review4 = Review.create({
-    content: 'Review4 Content',
+    content: 'Room for improvement with this one!',
     rate: ['*','*',]
   });
   const review5 = Review.create({
-    content: 'Review5 Content',
+    content: 'Pretty good.',
     rate: ['*','*','*',]
   });
   const review6 = Review.create({
-    content: 'Review6 Content',
+    content: 'Amazing!',
     rate: ['*','*','*','*','*']
   });
 
