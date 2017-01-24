@@ -35,7 +35,7 @@ const seed = () => {
     description: 'Tomato Condiment',
     price: .25,
     inventory_qty: 100,
-    photos: 'http://www.oddities123.com/wp-content/uploads/2016/04/hero_pdt_ketchup.png',
+    photos: 'https://img.clipartfest.com/4ce3c7ecfb3b6692ab4d6a56821be424_ketchup-on-pinterest-heinz-ketchup-clipart_1500-1500.jpeg',
     brand: 'Heinz'
   });
 
@@ -44,7 +44,7 @@ const seed = () => {
     description: 'Choice Cut.',
     price: 25.00,
     inventory_qty: 10,
-    photos: 'http://www.omahasteaks.com/gifs/os/dd_01_filet.jpg',
+    photos: 'http://cdn-image.foodandwine.com/sites/default/files/styles/550x550/public/hd-201204-ss-steak-cities-las-vegas-charlie-palmer-steak.jpg?itok=uV9BL1zK',
     brand: 'Boar\'s Head'
   });
 

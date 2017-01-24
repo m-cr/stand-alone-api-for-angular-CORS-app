@@ -22,11 +22,3 @@ router.get('/:id', (req, res, next) => {
   })
   .catch(next);
 });
-
-router.get('/:id/cart', (req, res, next) => {
-  Order.getCartForUser(req.params.id)
-  .then( cart => {
-    res.send(cart);
-  })
-  .catch(next);
-});

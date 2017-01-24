@@ -21,7 +21,7 @@ router.get('/:id', (req, res, next) => {
     where: {id: req.params.id},
     include: [Product, Order]
   })
-  .then( (lineItems) => {
+  .then( lineItems => {
     res.send(lineItems);
   })
   .catch(next);
@@ -34,7 +34,7 @@ router.post('/', (req, res, next) => {
     orderId: req.body.orderId,
     productId: req.body.productId
   })
-  .then( (lineitem) => {
+  .then( lineitem => {
     res.send(lineitem);
   })
   .catch(next);
