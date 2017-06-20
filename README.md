@@ -1,4 +1,4 @@
-# Standalone REST API solution for SiriusIQMobile
+# Standalone REST API
 
 Submitted my Michael Crowley
 
